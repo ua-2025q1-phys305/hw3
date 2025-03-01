@@ -33,3 +33,27 @@ The grading breakdown is as follows:
 By following the interface and prototypes provided in each assignment
 template, you can ensure compatibility with the autograding system and
 maximize your score.
+
+
+## Assignments
+
+### **Assignment 1**: Generate Synthetic Radioactive Decay Data (2 points)
+
+* **Objective**:
+  Implement a function that generates synthetic radioactive decay
+  count data given "true" values for the decay constant $\lambda$,
+  detector calibration factor $\alpha$, and a fixed background $b$.
+
+* **Details**:
+  * Write a function `datagen(lambda_true, alpha_true, b, N0, dt,
+    times, rng)` that returns:
+    1. An array of times `ts`.
+    2. An array of observed counts `Cts` drawn from the Poisson distribution.
+    3. The corresponding "true means" (the Poisson parameters) for reference.
+  * Assume the model:
+    $$C_t \sim \mathrm{Poisson}\left(\mu_t\right), \quad
+    \mu_t = \Delta t \left[\alpha \lambda N_0 e^{-\lambda t} + b\right].$$
+  * Provide a small test or a plot to show that the data looks
+    reasonable (e.g., a decreasing count rate over time plus some
+    constant offset from background).
+  * The code should be put in `a1.py`.
