@@ -115,3 +115,22 @@ maximize your score.
   * Store the posterior in a 2D array `post` and also return the
     arrays `lmbdas`, `alphas`.
   * The code should be placed in `src/phys305_hw3/a4.py`.
+
+### **Assignment 5**: Posterior Summaries (2 points)
+
+* **Objective**:
+  Extract statistical summaries (e.g., posterior means, marginals,
+  credible intervals) from your 2D posterior grid.
+
+* **Details**:
+  * Compute the posterior means $\mathbb{E}[\lambda]
+    \quad\text{and}\quad \mathbb{E}[\alpha]$.
+  * Compute 1D marginal distributions for $\lambda$ and $\alpha$ by
+    summation over the other axis, e.g.
+    $p(\lambda_i) = \sum_j p(\lambda_i,\alpha_j)$.
+  * Determine a 95% credible interval for each parameter by locating
+    appropriate percentiles in the marginal distribution.
+  * Compare your results to the "true" $\lambda_\text{true}$ and
+    $\alpha_\text{true}$ used in generating the synthetic data to
+    check accuracy.
+  * The code should be placed in `src/phys305_hw3/a5.py`.
