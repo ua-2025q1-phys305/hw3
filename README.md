@@ -95,3 +95,23 @@ maximize your score.
   * Use `demo/vis.ipynb` to confirm the function behaves properly for
     a few known scenarios or parameter values.
   * The code should be placed in `src/phys305_hw3/a3.py`.
+
+### **Assignment 4**: Construct the 2D Posterior on a Grid (2 points)
+
+* **Objective**:
+  Combine the priors (Assignment 2) and the likelihood (Assignment 3)
+  to build the **unnormalized posterior** and discretize it on a 2D
+  grid $(\lambda, \alpha)$.
+
+* **Details**:
+  * Implement `unnorm_posterior(lmbda, alpha, ...)` as
+    $\mathrm{UnnormPosterior}(\lambda,\alpha) =
+    \mathrm{Likelihood}(\lambda,\alpha) \times
+    p(\lambda) \times p(\alpha)$.
+  * Define a grid of values for $\lambda \in [\lambda_\min,
+    \lambda_\max]$ and $\alpha \in [\alpha_\min, \alpha_\max]$.
+  * Evaluate the unnormalized posterior for each grid cell, then
+    normalize so that the sum over all cells $\approx 1$.
+  * Store the posterior in a 2D array `post` and also return the
+    arrays `lmbdas`, `alphas`.
+  * The code should be placed in `src/phys305_hw3/a4.py`.
