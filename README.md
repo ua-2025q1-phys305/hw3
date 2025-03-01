@@ -53,7 +53,7 @@ maximize your score.
   * Assume the model:
     $$C_t \sim \mathrm{Poisson}\left(\mu_t\right), \quad
     \mu_t = \Delta t \left[\alpha \lambda N_0 e^{-\lambda t} + b\right].$$
-  * Provide a small test or a plot to show that the data looks
-    reasonable (e.g., a decreasing count rate over time plus some
-    constant offset from background).
-  * The code should be put in `a1.py`.
+  * Use `demo/vis.ipynb` to show that the data looks reasonable (e.g.,
+    a decreasing count rate over time plus some constant offset from
+    background).
+  * The code should be placed in `src/phys305_hw3/a1.py`.
