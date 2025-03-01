@@ -75,3 +75,23 @@ maximize your score.
   * Use `demo/vis.ipynb` to show that these priors behave as expected
     (e.g., strictly positive for $\lambda,\alpha$).
   * The code should be placed in `src/phys305_hw3/a2.py`.
+
+### **Assignment 3**: Implement the Poisson Likelihood (2 points)
+
+* **Objective**:
+  Given the counts $\{C_t\}$, times $\{t\}$, and fixed $b$, implement
+  the Poisson likelihood for parameters $\lambda$ and $\alpha$.
+
+* **Details**:
+  * Write a function `likelihood(lmbda, alpha, counts, times, dt, N0,
+    b)` that computes:
+    \begin{align}
+      \prod_{t} \mathrm{Poisson}\bigl(C_t \mid \mu_t(\lambda,\alpha)\bigr).
+    \end{align}
+  * Handle the case where $\mu_t \le 0$ (the likelihood should be
+    zero).
+  * Return the **product** of probabilities, or use a log-likelihood
+    internally for numerical stability.
+  * Use `demo/vis.ipynb` to confirm the function behaves properly for
+    a few known scenarios or parameter values.
+  * The code should be placed in `src/phys305_hw3/a3.py`.
