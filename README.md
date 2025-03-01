@@ -134,3 +134,19 @@ maximize your score.
     $\alpha_\text{true}$ used in generating the synthetic data to
     check accuracy.
   * The code should be placed in `src/phys305_hw3/a5.py`.
+
+
+## Additional Notes
+
+* **Collaboration**:
+  You are encouraged to discuss ideas with your peers, but your
+  submission must reflect your own work.
+* **Help and Resources**:
+  If you encounter any difficulties, please refer to the course
+  materials, consult your instructor, or seek help during office
+  hours.
+* **Deadlines**:
+  Be mindful of the submission deadline, as late submissions will not
+  be accepted.
+
+Good luck, and have fun working on the assignments!
