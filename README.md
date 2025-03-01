@@ -57,3 +57,21 @@ maximize your score.
     a decreasing count rate over time plus some constant offset from
     background).
   * The code should be placed in `src/phys305_hw3/a1.py`.
+
+### **Assignment 2**: Define Priors for $\lambda$ and $\alpha$ (2 points)
+
+* **Objective**:
+  Choose and implement prior probability density functions (PDFs) for
+  the two unknown parameters $\lambda$ and $\alpha$.
+
+* **Details**:
+  * Use a **Gamma** prior for $\lambda$, e.g. $\lambda \sim
+    \mathrm{Gamma}(\alpha_\lambda, \beta_\lambda)$.
+  * Use a **LogNormal** prior for $\alpha$, e.g. $\alpha \sim
+    \mathrm{LogNormal}(\mu_\alpha, \sigma_\alpha^2)$.
+  * Write functions `prior0_lambda(lambda)` and `prior0_alpha(alpha)`
+    that each return PDF values. They should properly handle invalid
+    parameter values (e.g., $\lambda \le 0$).
+  * Use `demo/vis.ipynb` to show that these priors behave as expected
+    (e.g., strictly positive for $\lambda,\alpha$).
+  * The code should be placed in `src/phys305_hw3/a2.py`.
