@@ -51,8 +51,8 @@ maximize your score.
     2. An array of observed counts `Cts` drawn from the Poisson distribution.
     3. The corresponding "true means" (the Poisson parameters) for reference.
   * Assume the model:
-    $$C_t \sim \mathrm{Poisson}\left(\mu_t\right), \quad
-    \mu_t = \Delta t \left[\alpha \lambda N_0 e^{-\lambda t} + b\right].$$
+    $C_t \sim \mathrm{Poisson}\left(\mu_t\right),
+    \mu_t = \Delta t \left[\alpha \lambda N_0 e^{-\lambda t} + b\right]$.
   * Use `demo/vis.ipynb` to show that the data looks reasonable (e.g.,
     a decreasing count rate over time plus some constant offset from
     background).
@@ -84,10 +84,10 @@ maximize your score.
 
 * **Details**:
   * Write a function `likelihood(lmbda, alpha, counts, times, dt, N0,
-    b)` that computes:
-    \begin{align}
-      \prod_{t} \mathrm{Poisson}\bigl(C_t \mid \mu_t(\lambda,\alpha)\bigr).
-    \end{align}
+    b)` that computes: $\prod_{t} \mathrm{Poisson}\left(C_t \mid
+    \mu_t(\lambda,\alpha)\right)$.
+    Note that `lambda` is a python keyword so we spell our variable as
+    `lmbda`.
   * Handle the case where $\mu_t \le 0$ (the likelihood should be
     zero).
   * Return the **product** of probabilities, or use a log-likelihood
