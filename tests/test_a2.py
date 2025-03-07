@@ -8,7 +8,7 @@ def test_prior0_n0():
     n0s, ps_n0 = prior0_n0(n=4)
 
     assert n0s   == pytest.approx([0,100,200,300])
-    assert ps_n0 == pytest.approx(1/3)
+    assert ps_n0 == pytest.approx(1/300)
 
 def test_prior0_lmbda():
 
