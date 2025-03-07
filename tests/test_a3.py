@@ -1,21 +1,28 @@
 import pytest
 import numpy as np
-from numpy import log
+from   numpy import log
 
 from phys305_hw3 import logpoisson, count, likelihood
 
 
+# Ground truth parameters for testing
 n0    = 100
 lmbda = 0.01
+groundtruth = (n0, lmbda)
 
+# Create a set of time points and a measurement interval
 ts = np.linspace(0, 100, 11)
 dt = 10
 
-groundtruth = n0, lmbda
-
 
 def test_logpoisson():
+    """Test the `logpoisson()` function to verify that it correctly
+    computes the logarithm of the Poisson probability mass function.
 
+    The tests check for a variety of k and lmbda values to ensure that
+    the function behaves as expected.
+
+    """
     assert logpoisson(0, 1) == pytest.approx(-1)
     assert logpoisson(1, 1) == pytest.approx(-1)
     assert logpoisson(2, 1) == pytest.approx(-1-log(2))
@@ -30,7 +37,15 @@ def test_logpoisson():
 
 
 def test_likelihood():
+    """Test the `likelihood()` function to verify that it correctly
+    computes the combined likelihood over a series of measurements.
 
+    This test first computes the expected counts using the count
+    function, then calculates the likelihood incrementally over
+    subsets of the data, and finally compares the computed likelihood
+    values to pre-computed expected values.
+
+    """
     Cts = count(ts, dt, groundtruth)
 
     likes = []
