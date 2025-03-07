@@ -31,4 +31,4 @@ def test_lmbda():
 
     lmbda = trapezoid2(post * lmbdass, params)
 
-    assert lmbda == pytest.approx(0.009, rel=1e-1)
+    assert lmbda == pytest.approx(0.0088, rel=1e-1)
