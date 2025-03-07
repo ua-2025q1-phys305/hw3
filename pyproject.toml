@@ -3,6 +3,7 @@ name = "phys305_hw3"
 version = "0.0.0"
 dependencies = [
     "numpy",
+    "scipy",
     "matplotlib",
     "pytest",
 ]
