@@ -101,23 +101,49 @@ behavior of your implementations.
   inline comments.
 
 
-### **Assignment 2**: Define Priors for $\lambda$ and $\alpha$ (2 points)
+### **Assignment 2**: Define Priors for $n_0$ and $\lambda$ (2 points)
 
 * **Objective**:
   Choose and implement prior probability density functions (PDFs) for
-  the two unknown parameters $\lambda$ and $\alpha$.
+  the two unknown parameters of the radioactive decay model: the
+  initial count rate $n_0$ and the decay constant $\lambda$.
 
 * **Details**:
-  * Use a **Gamma** prior for $\lambda$, e.g. $\lambda \sim
-    \mathrm{Gamma}(\alpha_\lambda, \beta_\lambda)$.
-  * Use a **LogNormal** prior for $\alpha$, e.g. $\alpha \sim
-    \mathrm{LogNormal}(\mu_\alpha, \sigma_\alpha^2)$.
-  * Write functions `prior0_lambda(lambda)` and `prior0_alpha(alpha)`
-    that each return PDF values. They should properly handle invalid
-    parameter values (e.g., $\lambda \le 0$).
-  * Use `demo/vis.ipynb` to show that these priors behave as expected
-    (e.g., strictly positive for $\lambda,\alpha$).
-  * The code should be placed in `src/phys305_hw3/a2.py`.
+  In this assignment, you will implement two functions in
+  `src/phys305_hw3/a2.py`:
+
+  1. `prior0_n0(l=0, u=300, n=301)`
+     * Purpose: Create a uniform prior for $n_0$ over a specified
+       interval $[l, u]$.
+     * Hints:
+       * Use `numpy.linspace()` to generate a discretized grid of
+         $n_0$ values.
+       * Create a uniform prior by assigning equal probability to each
+         grid point.
+       * Normalize the prior using the trapezoidal integration rule so
+         that the total probability integrates to 1.
+
+  2. `prior0_lmbda(l=1e-4, u=1, n=401, mu=np.log(0.01), sigma=np.log(2))`
+     * Purpose: Create a log-normal prior for the decay constant $\lambda$.
+     * Hints:
+       * Use `numpy.logspace()` to generate a log-spaced grid of
+         $\lambda$ values.
+       * Compute the unnormalized log-normal prior values using the
+         formula:
+         $p(\lambda) \propto
+	 \exp\left[-\frac{1}{2}\left(\frac{\log(\lambda)-\mu}{\sigma}\right)^2\right]$
+       * Normalize the resulting PDF using the trapezoidal rule with
+         respect to the grid so that it sums (or integrates) to 1.
+
+* **Visualization**:
+  Use the provided Jupyter notebook at `demo/vis.ipynb` to verify that
+  your priors behave as expected.
+
+* **Submission**:
+  Place your implementations in `src/phys305_hw3/a2.py`. Ensure that
+  your code is well-documented with clear docstrings and inline
+  comments.
+
 
 ### **Assignment 3**: Implement the Poisson Likelihood (2 points)
 
