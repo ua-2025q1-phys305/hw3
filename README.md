@@ -5,6 +5,8 @@ This homework set is worth **10 points** and is designed to test your
 understanding of topics that we've covered.
 The submission cutoff time is at **Tuesday Mar 20th, 11:59pm** Arizona
 time.
+Please use [this link](https://classroom.github.com/a/EWQBHHDo) to
+accept it from GitHub Classroom.
 
 
 ## Structure and Grading
