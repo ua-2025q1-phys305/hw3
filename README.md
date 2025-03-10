@@ -215,24 +215,46 @@ behavior of your implementations.
        * Normalize the posterior so that its 2D integral over the grid is approximately 1.
 
 
-### **Assignment 5**: Posterior Summaries (2 points)
+### **Assignment 5**: Implement Sequential Posterior Updates with `runexpr()` (2 points)
 
 * **Objective**:
-  Extract statistical summaries (e.g., posterior means, marginals,
-  credible intervals) from your 2D posterior grid.
+
+  Implement a function `runexpr()` that simulates a series of
+  experiments to update the posterior distribution over model
+  parameters using sequential observations.
 
 * **Details**:
-  * Compute the posterior means $\mathbb{E}[\lambda]
-    \quad\text{and}\quad \mathbb{E}[\alpha]$.
-  * Compute 1D marginal distributions for $\lambda$ and $\alpha$ by
-    summation over the other axis, e.g.
-    $p(\lambda_i) = \sum_j p(\lambda_i,\alpha_j)$.
-  * Determine a 95% credible interval for each parameter by locating
-    appropriate percentiles in the marginal distribution.
-  * Compare your results to the "true" $\lambda_\text{true}$ and
-    $\alpha_\text{true}$ used in generating the synthetic data to
-    check accuracy.
-  * The code should be placed in `src/phys305_hw3/a5.py`.
+  In this assignment, you will write the `runexpr()` function in
+  `src/phys305_hw3/a5.py`.
+  This function should:
+
+  * **Initialize the Experiment**:
+    * Compute prior probability distributions for $n_0$ and $\lambda$
+      using your implementations from Assignment 2.
+    * Create a 2D grid of parameter values (using, e.g.,
+      `np.meshgrid()`) and compute the combined prior on this grid.
+
+  * **Simulate Sequential Observations**:
+    * Define a set of time points and a measurement interval for the
+      experiment.
+    * Generate synthetic observed counts using your data generation
+      function from Assignment 1.
+
+  * **Update the Posterior**:
+    * Use the observed counts and the previous posterior (starting
+      with the initial prior) to update the posterior distribution by
+      combining it with the likelihood (from Assignment 3).
+    * Repeat the update process for a specified number of sequential
+      experiments.
+
+  * **Return the Results**:
+    * The function should return a tuple `(posts, params)` where:
+      * `posts` is a list of posterior distributions, starting with
+        the initial prior and followed by the updated posteriors after
+        each experiment.
+      * `params` is a tuple of the parameter grids (e.g., arrays of
+       	discretized $n_0$ and $\lambda$ values) used in the
+       	computation.
 
 
 ## Additional Notes
