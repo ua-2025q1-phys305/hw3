@@ -65,10 +65,14 @@ behavior of your implementations.
        * `ts` (float or ndarray): The end time(s) of the measurement interval.
        * `dt` (float): The duration $\Delta t$ of the measurement interval.
        * `groundtruth` (tuple): A tuple $(n_0, \lambda)$ where:
-         * `n_0` (float): The initial count rate.
-         * `\lambda` (float): The decay constant.
+         * `n0` (float): The initial count rate.
+         * `lmbda` (float): The decay constant.
+       * *Note*: Since `lambda` is a Python keyword, we use the
+         variable name `lmbda` in our code.
+
      * Returns: The expected number of counts computed as:
-       $\text{counts} = n_0 \left(e^{-\lambda (t - \Delta t)} - e^{-\lambda t}\right)$
+       `counts` =
+       $\mu_t = \int_{t-\Delta t}^t n_0 \exp(-\lambda t')dt'$.
 
   2. `sample(ts, dt, groundtruth)`
      * Purpose: Generate synthetic observed counts by drawing samples
@@ -86,9 +90,10 @@ behavior of your implementations.
 * **Model Specification**:
   The radioactive decay data is modeled as follows:
   $C_t \sim \text{Poisson}\left(\mu_t\right),
-  \quad \text{with}
-  \quad \mu_t = n_0 \left(e^{-\lambda (t - \Delta t)} - e^{-\lambda t}\right)$
-  where $C_t$ represents the observed count at time $t$.
+  \mbox{ with }
+  \mu_t = \int_{t-\Delta t}^t n_0 \exp(-\lambda t')dt'$
+  where $C_t$ represents the cumulative count over $\Delta t$ at time
+  $t$.
 
 
 ### **Assignment 2**: Define Priors for $n_0$ and $\lambda$ (2 points)
@@ -121,7 +126,8 @@ behavior of your implementations.
        * Compute the unnormalized log-normal prior values using the
          formula:
          $p(\lambda) \propto
-	 \exp\left[-\frac{1}{2}\left(\frac{\log(\lambda)-\mu}{\sigma}\right)^2\right]$
+	 \exp\left[-\frac{1}{2}\left(\frac{\log(\lambda)-\mu}{\sigma}\right)^2\right]$,
+	 where $\mu = \ln(0.01)$ and $\sigma = \ln(2)$.
        * Normalize the resulting PDF using the trapezoidal rule with
          respect to the grid so that it sums (or integrates) to 1.
 
@@ -132,8 +138,6 @@ behavior of your implementations.
   Given a set of observed counts $\{C_t\}$ at time points $\{t\}$,
   implement a function to compute the Poisson likelihood for the
   parameters $n_0$ and $\lambda$.
-  *Note*: Since `lambda` is a Python keyword, we use the variable name
-  `lmbda` in your code.
 
 * **Details**:
   In this assignment, you will write two functions in
@@ -144,7 +148,7 @@ behavior of your implementations.
        function for an observed count $k$ given an expected count
        (denoted by `lmbda`).
      * Formula:
-       $\ln P(k|\mu) = k \ln(\mu) - \mu - \ln(k!)$
+       $\ln P(k|\mu) = k \ln(\mu) - \mu - \ln(k!)$.
        Use `scipy.special.loggamma()` to calculate $\ln(k!)$ as `loggamma(k+1)`.
 
   2. **Implement `likelihood(obs, params)`**
@@ -194,8 +198,8 @@ behavior of your implementations.
        x-axis.
      * `trapezoidy(f, grid)`: Integrates a 2D array `f` along the
        y-axis.
-     *Note*: Implementing `trapezoidx()` and `trapezoidy()` is
-      optional.
+     * *Note*: Implementing `trapezoidx()` and `trapezoidy()` is
+       optional.
 
   2. Compute the Posterior:
      Write a function `posterior(obs, prior, params)` that calculates:

@@ -11,7 +11,7 @@ def test_prior0_n0():
     1/300.
 
     """
-    n0s, ps_n0 = prior0_n0(n=4)
+    n0s, ps_n0 = prior0_n0(l=0, u=300, n=4)
 
     assert n0s   == pytest.approx([0, 100, 200, 300])
     assert ps_n0 == pytest.approx(1/300)
@@ -27,7 +27,7 @@ def test_prior0_lmbda():
     values.
 
     """
-    lmbdas, ps_lmbda = prior0_lmbda(n=5)
+    lmbdas, ps_lmbda = prior0_lmbda(l=1e-4, u=1, n=5, mu=np.log(0.01), sigma=np.log(2))
 
     assert lmbdas   == pytest.approx([1e-4, 1e-3, 1e-2, 1e-1, 1])
     assert ps_lmbda == pytest.approx([

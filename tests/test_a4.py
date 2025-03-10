@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from numpy import exp, pi
+from numpy import log, exp, pi
 
 from phys305_hw3 import count, prior0_n0, prior0_lmbda, trapezoid2, posterior
 
@@ -16,8 +16,8 @@ dt  = 10
 Cts = count(ts, dt, groundtruth)
 
 # Create a discretized grid for n0 and lmbda parameters
-n0s,    ps_n0    = prior0_n0(n=4)
-lmbdas, ps_lmbda = prior0_lmbda(n=5)
+n0s,    ps_n0    = prior0_n0(l=0, u=300, n=4)
+lmbdas, ps_lmbda = prior0_lmbda(l=1e-4, u=1, n=5, mu=log(0.01), sigma=log(2))
 
 # Combine the 1D parameter grids into 2D grid
 params = np.meshgrid(n0s, lmbdas)
