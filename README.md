@@ -37,26 +37,69 @@ maximize your score.
 
 ## Assignments
 
+To simplify debugging and to help you visualize your progress, a
+Jupyter notebook is provided at `demo/vis.ipynb`.
+This notebook demonstrates how the functions developed for each
+assignment interact and shows sample visualizations. Use the notebook
+alongside `pytest` to validate your code and to better understand the
+behavior of your implementations.
+
+
 ### **Assignment 1**: Generate Synthetic Radioactive Decay Data (2 points)
 
 * **Objective**:
-  Implement a function that generates synthetic radioactive decay
-  count data given "true" values for the decay constant $\lambda$,
-  detector calibration factor $\alpha$, and a fixed background $b$.
+  Implement functions that generate synthetic radioactive decay count
+  data given "true" values of $n_0$ (initial count rate) and the
+  decay constant $\lambda$.
 
 * **Details**:
-  * Write a function `datagen(lambda_true, alpha_true, b, N0, dt,
-    times, rng)` that returns:
-    1. An array of times `ts`.
-    2. An array of observed counts `Cts` drawn from the Poisson distribution.
-    3. The corresponding "true means" (the Poisson parameters) for reference.
-  * Assume the model:
-    $C_t \sim \mathrm{Poisson}\left(\mu_t\right),
-    \mu_t = \Delta t \left[\alpha \lambda N_0 e^{-\lambda t} + b\right]$.
-  * Use `demo/vis.ipynb` to show that the data looks reasonable (e.g.,
-    a decreasing count rate over time plus some constant offset from
-    background).
-  * The code should be placed in `src/phys305_hw3/a1.py`.
+  You are required to implement two key functions in
+  `src/phys305_hw3/a1.py`:
+
+  1. `count(ts, dt, groundtruth)`
+     * Purpose: Compute the expected number of counts over a
+       measurement interval $[t-\Delta t, t]$ using the radioactive
+       decay law.
+
+     * Parameters:
+       * `ts` (float or ndarray): The end time(s) of the measurement interval.
+       * `dt` (float): The duration $\Delta t$ of the measurement interval.
+       * `groundtruth` (tuple): A tuple $(n_0, \lambda)$ where:
+         * `n_0` (float): The initial count rate.
+         * `\lambda` (float): The decay constant.
+     * Returns: The expected number of counts computed as:
+       $\text{counts} = n_0 \left(e^{-\lambda (t - \Delta t)} - e^{-\lambda t}\right)$
+
+  2. `sample(ts, dt, groundtruth)`
+     * Purpose: Generate synthetic observed counts by drawing samples
+       from a Poisson distribution with the mean provided by the
+       `count()` function.
+     * Parameters: `ts`, `dt`, `groundtruth`: Same as in the `count()`
+       function.
+     * Returns: A sampled count (or an array of counts, if `ts` is an
+       array) obtained from a Poisson distribution.
+     * Hints:
+       * Call your `count()` function to compute the expected counts.
+       * Use `np.random.poisson()` to generate a random sample with
+         that expected value.
+
+* **Model Specification**:
+  The radioactive decay data is modeled as follows:
+  $C_t \sim \text{Poisson}\left(\mu_t\right),
+  \quad \text{with}
+  \quad \mu_t = n_0 \left(e^{-\lambda (t - \Delta t)} - e^{-\lambda t}\right)$
+  where $C_t$ represents the observed count at time $t$.
+
+* **Visualization**:
+  Use the provided Jupyter notebook at `demo/vis.ipynb` to verify that
+  the synthetic data looks reasonable---for example, observe the
+  expected decreasing trend of counts over time.
+
+* **Submission**:
+  Ensure your implementation is placed in `src/phys305_hw3/a1.py` and
+  that your code is well-documented with clear function docstrings and
+  inline comments.
+
 
 ### **Assignment 2**: Define Priors for $\lambda$ and $\alpha$ (2 points)
 
