@@ -175,22 +175,45 @@ behavior of your implementations.
 ### **Assignment 4**: Construct the 2D Posterior on a Grid (2 points)
 
 * **Objective**:
-  Combine the priors (Assignment 2) and the likelihood (Assignment 3)
-  to build the **unnormalized posterior** and discretize it on a 2D
-  grid $(\lambda, \alpha)$.
+  Combine the priors from Assignment 2 and the likelihood from
+  Assignment 3 to build the **unnormalized posterior** over a 2D grid
+  of parameters, then normalize it so that the total probability sums
+  (or integrates) to 1. In our case, the grid will represent
+  discretized values of $n_0$ and $\lambda$.
 
 * **Details**:
-  * Implement `unnorm_posterior(lmbda, alpha, ...)` as
-    $\mathrm{UnnormPosterior}(\lambda,\alpha) =
-    \mathrm{Likelihood}(\lambda,\alpha) \times
-    p(\lambda) \times p(\alpha)$.
-  * Define a grid of values for $\lambda \in [\lambda_\min,
-    \lambda_\max]$ and $\alpha \in [\alpha_\min, \alpha_\max]$.
-  * Evaluate the unnormalized posterior for each grid cell, then
-    normalize so that the sum over all cells $\approx 1$.
-  * Store the posterior in a 2D array `post` and also return the
-    arrays `lmbdas`, `alphas`.
-  * The code should be placed in `src/phys305_hw3/a4.py`.
+
+  In this assignment, you will implement the following in
+  `src/phys305_hw3/a4.py`:
+
+  1. **2D Trapezoidal Integration**:
+     To normalize the posterior, implement a function `trapezoid2(f,
+     grid)` that performs 2D integration over your grid.
+     You may write helper functions such as:
+     * `trapezoidx(f, grid)`: Integrates a 2D array `f` along the
+       x-axis.
+     * `trapezoidy(f, grid)`: Integrates a 2D array `f` along the
+       y-axis.
+     *Note*: Implementing `trapezoidx()` and `trapezoidy()` is
+      optional.
+
+  2. Compute the Posterior:
+     Write a function `posterior(obs, prior, params)` that calculates:
+     $\text{posterior}(\lambda, n_0) \propto
+     \text{likelihood}(\lambda, n_0) \times p(\lambda) \times p(n_0)$
+     * Parameters:
+       * `obs`: A tuple $(Cts, ts, dt)$ representing the observed
+         counts, time points, and measurement interval.
+       * `prior`: A 2D array containing the prior probability
+         evaluated on the grid.
+       * `params`: A tuple of parameter grids (e.g., generated via
+         `np.meshgrid()` for $n_0$ and $\lambda$.
+     * Hints:
+       * Compute the unnormalized posterior by multiplying the
+         likelihood (from Assignment 3) and the prior on an
+         element-wise basis.
+       * Normalize the posterior so that its 2D integral over the grid is approximately 1.
+
 
 ### **Assignment 5**: Posterior Summaries (2 points)
 
