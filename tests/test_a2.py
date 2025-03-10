@@ -1,4 +1,5 @@
 import pytest
+from   numpy import log
 
 from phys305_hw3 import prior0_n0, prior0_lmbda
 
@@ -27,7 +28,7 @@ def test_prior0_lmbda():
     values.
 
     """
-    lmbdas, ps_lmbda = prior0_lmbda(l=1e-4, u=1, n=5, mu=np.log(0.01), sigma=np.log(2))
+    lmbdas, ps_lmbda = prior0_lmbda(l=1e-4, u=1, n=5, mu=log(0.01), sigma=log(2))
 
     assert lmbdas   == pytest.approx([1e-4, 1e-3, 1e-2, 1e-1, 1])
     assert ps_lmbda == pytest.approx([
