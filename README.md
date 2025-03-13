@@ -74,7 +74,7 @@ behavior of your implementations.
 
      * Returns: The expected number of counts computed as:
        `counts` =
-       $\mu_t = \int_{t-\Delta t}^t n_0 \exp(-\lambda t')dt'$.
+       $\mu_t = \int_{t-\Delta t}^t n_0 \lambda \exp(-\lambda t')dt'$.
 
   2. `sample(ts, dt, groundtruth)`
      * Purpose: Generate synthetic observed counts by drawing samples
@@ -93,7 +93,7 @@ behavior of your implementations.
   The radioactive decay data is modeled as follows:
   $C_t \sim \text{Poisson}\left(\mu_t\right),
   \mbox{ with }
-  \mu_t = \int_{t-\Delta t}^t n_0 \exp(-\lambda t')dt'$
+  \mu_t = \int_{t-\Delta t}^t n_0 \lambda \exp(-\lambda t')dt'$
   where $C_t$ represents the cumulative count over $\Delta t$ at time
   $t$.
 
